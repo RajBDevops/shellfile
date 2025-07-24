@@ -8,10 +8,15 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v2
-      - name: Debug - list files
+      - name: Debug — list files and directories
         run: |
+          echo "Current directory:"
           pwd
+          echo "Files in current directory:"
           ls -al
+          echo "Searching for mydocker.sh:"
+          find . -name "mydocker.sh"
+
       -  name: check out the permission to exictie the file
          run: |
              chmod 700 mydocker.sh
