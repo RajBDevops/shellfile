@@ -8,7 +8,9 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v2
-
+      -  name: check out the permission to exictie the file
+         run: chmod 600 mydocker.sh
+    
       - name: Install Docker in EC2
         run: ./mydocker.sh
 
