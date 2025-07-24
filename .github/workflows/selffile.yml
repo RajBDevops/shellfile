@@ -1,6 +1,6 @@
 name: Docker install in EC2
 
-##on: push
+on: push
 
 jobs:
   install-docker:
@@ -8,8 +8,14 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v2
-      
-      - name: Make script executable and run it
+      - name: Check if Docker exists and run the correct script
         run: |
-          chmod +x mydocker.sh .
-          ./mydocker.sh
+          if command -v docker &> /dev/null; then
+            echo "Docker is already installed. Running docker.sh..."
+            chmod +x docker.sh .
+            ./docker.sh
+          else
+            echo "Docker not found. Running mydocker.sh to install it..."
+            chmod +x mydocker.sh .
+            ./mydocker.sh
+          fi
