@@ -22,11 +22,7 @@ jobs:
      steps:
         - name: Install Docker in EC2
           run: ./mydocker.sh
-        - name: Make script executable and run it
-          run: |
-            chmod +x mydocker.sh .
-            ./mydocker.sh
-
+      
             
         
   
