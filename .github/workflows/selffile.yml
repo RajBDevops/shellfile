@@ -19,7 +19,7 @@ jobs:
 
       - name: Make script executable and run it
         run: |
-          chmod +x . /mydocker.sh 
+          chmod +x mydocker.sh .
           ./mydocker.sh
 
             
