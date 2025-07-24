@@ -19,7 +19,7 @@ jobs:
 
       -  name: check out the permission to exictie the file
          run: |
-             chmod 700 mydocker.sh
+             chmod 700 ./mydocker.sh
              ./mydocker.sh
   docker-run:
      needs: install-docker
