@@ -16,11 +16,16 @@ jobs:
           ls -al
           echo "Searching for mydocker.sh:"
           find . -name "mydocker.sh"
-
-      - name: Make script executable and run it
-        run: |
-          chmod +x mydocker.sh .
-          ./mydocker.sh
+  docker-run:
+     needs: install-docker
+     runs-on: self-hosted
+     steps:
+        - name: Install Docker in EC2
+          run: ./mydocker.sh
+        - name: Make script executable and run it
+          run: |
+            chmod +x mydocker.sh .
+            ./mydocker.sh
 
             
         
