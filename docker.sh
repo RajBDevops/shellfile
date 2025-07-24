@@ -1,4 +1,4 @@
 #!/bin/bash
- docker --version >/dev/null 2>&1;then
+ docker --version >/dev/null
  echo "docker is already installed"
 
