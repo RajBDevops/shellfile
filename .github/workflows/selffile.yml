@@ -8,6 +8,10 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v2
+      - name: Debug - list files
+        run: |
+          pwd
+          ls -al
       -  name: check out the permission to exictie the file
          run: |
              chmod +x mydocker.sh
