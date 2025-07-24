@@ -19,8 +19,8 @@ jobs:
 
       -  name: check out the permission to exictie the file
          run: |
-             chmod 700 ./mydocker.sh
-             ./mydocker.sh
+             chmod 700 ./home/ubuntu/actions-runner/_work/shellfile/shellfile/mydocker.sh
+             ./home/ubuntu/actions-runner/_work/shellfile/shellfile/mydocker.sh
   docker-run:
      needs: install-docker
      runs-on: self-hosted
