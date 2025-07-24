@@ -1,6 +1,6 @@
 name: Docker install in EC2
 
-on: push
+##on: push
 
 jobs:
   install-docker:
