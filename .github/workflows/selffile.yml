@@ -1,0 +1,17 @@
+name: Docker install in EC2
+
+on: push
+
+jobs:
+  install-docker:
+    runs-on: self-hosted
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
+
+      - name: Install Docker in EC2
+        run: ./mydocker.sh
+
+            
+        
+  
