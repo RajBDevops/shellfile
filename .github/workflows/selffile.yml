@@ -14,7 +14,7 @@ jobs:
           ls -al
       -  name: check out the permission to exictie the file
          run: |
-             chmod +x mydocker.sh
+             chmod 700 mydocker.sh
              ./mydocker.sh
   docker-run:
      needs: install-docker
