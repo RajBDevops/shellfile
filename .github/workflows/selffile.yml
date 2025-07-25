@@ -46,3 +46,4 @@ jobs:
             echo "Docker not found. Running mydocker.sh to install it..."
             chmod +x mydocker.sh
             ./mydocker.sh
+          fi
