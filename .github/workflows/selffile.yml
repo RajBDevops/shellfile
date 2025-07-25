@@ -31,7 +31,7 @@ jobs:
        cat ec2.tf || echo "ec2.tf not found"
 
     - name: Terraform Init & Plan
-      working-directory: shellfile/main.tf
+      working-directory: /home/runner/work/shellfile/shellfile
       run:  terraform init
      
     - name: Terraform Init & Plan
