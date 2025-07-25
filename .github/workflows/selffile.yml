@@ -23,6 +23,12 @@ jobs:
        uses: hashicorp/setup-terraform@v3
        with:
             terraform_version: 1.6.6
+    - name: Debug File Check
+      run: |
+       pwd
+       ls -al
+       cat main.tf || echo "main.tf not found"
+       cat ec2.tf || echo "ec2.tf not found"
 
     - name: Terraform Init & Plan
       working-directory: .
