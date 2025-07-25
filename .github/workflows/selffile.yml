@@ -1,60 +1,48 @@
-name: Create EC2 and Docker install in EC2
+name: deploy ec2
 
-on: push
+on:
+  push:
 
 jobs:
- deploy-Ec2:
-   runs-on: ubuntu-latest
-   steps:
-     -  name: check out the code
-        uses: actions/checkout@v3
-     -  name: configure with aws
-        uses: aws-actions/configure-aws-credentials@v2
-        
-        with:
-           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-           aws-region: us-east-1
- create-ec2:
-  runs-on: ubuntu-latest
-  needs: deploy-Ec2
-  steps:
-    -  name: Setup Terraform
-       uses: hashicorp/setup-terraform@v3
-       with:
-            terraform_version: 1.6.6
-    - name: Debug File Check
-      run: |
-       pwd
-       ls -al
-       cat main.tf || echo "main.tf not found"
-       cat ec2.tf || echo "ec2.tf not found"
+  deploy-ec2:
+    runs-on: ubuntu-latest
 
-    - name: Terraform Init & Plan
-      working-directory: /home/runner/work/shellfile/shellfile
-      run:  terraform init
-     
-    - name: Terraform Init & Plan
-      run:  terraform plan
-     
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-     
-    
- install-docker:
-     runs-on: ubuntu-latest
-     needs: create-ec2
-     steps:
-      - name: Check out the code
+    steps:
+      - name: Checkout the code
         uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Terraform Init & Apply
+        run: |
+          terraform init
+          terraform plan
+          terraform apply -auto-approve  
+
+  install-docker:
+    runs-on: ubuntu-latest
+    needs: deploy-ec2
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
       - name: Check if Docker exists and run the correct script
         run: |
           if command -v docker &> /dev/null; then
             echo "Docker is already installed. Running docker.sh..."
-            chmod +x docker.sh .
+            chmod +x docker.sh
             ./docker.sh
           else
             echo "Docker not found. Running mydocker.sh to install it..."
-            chmod +x mydocker.sh .
+            chmod +x mydocker.sh
             ./mydocker.sh
-          fi
