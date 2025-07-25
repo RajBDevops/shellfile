@@ -20,7 +20,7 @@ jobs:
   needs: deploy-Ec2
   steps:
     -  name: Setup Terraform
-       uses: hashicorp/setup-terraform@v2
+       uses: hashicorp/setup-terraform@v3
        with:
             terraform_version: 1.6.6
 
@@ -39,7 +39,7 @@ jobs:
      needs: create-ec2
      steps:
       - name: Check out the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Check if Docker exists and run the correct script
         run: |
           if command -v docker &> /dev/null; then
